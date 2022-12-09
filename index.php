@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,7 +52,7 @@
           <li><a class="active" href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="list-dsn.php">Dosen</a></li>
-          <li><a href="list-mhs.php">Mahasiswa</a></li>
+          <li><a href="list-mhs.php">Rombel</a></li>
           <li><a href="events.html">Events</a></li>
           <li><a href="pricing.html">Pricing</a></li>
 
@@ -77,7 +78,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="courses.html" class="get-started-btn">Get Started</a>
+      <a href="login.php" class="get-started-btn">Login</a>
 
     </div>
   </header><!-- End Header -->
@@ -87,7 +88,7 @@
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
       <h1>Sistem Akademik Unice</h1>
       <h2>Universitas Negeri Cemarang</h2>
-      <a href="courses.html" class="btn-get-started">Get Started</a>
+      <a href="login.php" class="btn-get-started">Login</a>
     </div>
   </section><!-- End Hero -->
 
