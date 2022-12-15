@@ -2,7 +2,9 @@
   session_start();
   // include 'cek_login.php';
   require 'connection/conn.php';
-  $hasil = mysqli_query($conn, "SELECT * FROM mahasiswa WHERE rombel = '".$_SESSION['rombel']."' AND smt_now = '".$_SESSION['smt_now']."'");
+//   $hasil = mysqli_query($conn, "SELECT * FROM jadwal_kuliah WHERE rombel = '".$_SESSION['rombel']."'");
+//   $matkul = mysqli_query($conn, "SELECT nama_matkul FROM mata_kuliah WHERE kode_matkul = '".$data['kode_matkul']."'");
+  $hasil = mysqli_query($conn, "SELECT mata_kuliah.nama_matkul, mata_kuliah.sks, j.ruangan, j.jam_mulai, j.hari, dosen.nama_dsn FROM ((jadwal_kuliah j JOIN mata_kuliah ON j.kode_matkul = mata_kuliah.kode_matkul) JOIN dosen ON j.id_dosen = dosen.id_dosen) WHERE rombel = '".$_SESSION['rombel']."' ORDER BY hari DESC");
 ?>
 
 <!DOCTYPE html>
@@ -49,9 +51,9 @@
       <ul>
           <li><a href="home.php">Home</a></li>
           <li><a href="list-dsn.php">Dosen</a></li>
-          <li><a class="active" href="list-mhs.php">Rombel</a></li>
+          <li><a href="list-mhs.php">Rombel</a></li>
           <li><a href="kurikulum.php">Kurikulum</a></li>
-          <li><a href="jadwal.php">Jadwal</a></li>
+          <li><a class="active" href="jadwal.php">Jadwal</a></li>
           <li><a href="list-pesan-mk.php">Pemesanan MK</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -72,29 +74,34 @@
   <div class="container">
     <center>
       <h2>
-        List Mahasiswa Rombel
+        Jadwal
       </h2>
     </center>
     <table class="table table-hover-dark">
       <thead class="thead-dark">
         <tr>
           <th scope="col">No.</th>
-          <th scope="col">NIM</th>
-          <th scope="col">Nama</th>
-          <th scope="col">Email</th>
-          <th scope="col">Tanggal Lahir</th>
+          <th scope="col">Mata Kuliah</th>
+          <th scope="col">Pengampu</th>
+          <th scope="col">Ruangan</th>
+          <th scope="col">Jam</th>
+          <th scope="col">Hari</th>
+          <th scope="col">SKS</th>
         </tr>
       </thead>
       <tbody>
         <?php
         $no = 1;
         while ($data = mysqli_fetch_array($hasil)) {
+        //   $datamatkul = mysqli_fetch_array($matkul);
           echo "<tr>";
           echo "<th>" . $no . "</th>";
-          echo "<td>" . $data['nim_mhs'] . "</td>";
-          echo "<td>" . $data['nama_mhs'] . "</td>";
-          echo "<td>" . $data['email_mhs'] . "</td>";
-          echo "<td>" . $data['tgl_lahir'] . "</td>";
+          echo "<td>" . $data['nama_matkul'] . "</td>";
+          echo "<td>" . $data['nama_dsn'] . "</td>";
+          echo "<td>" . $data['ruangan'] . "</td>";
+          echo "<td>" . $data['jam_mulai'] . "</td>";
+          echo "<td>" . $data['hari'] . "</td>";
+          echo "<td>" . $data['sks'] . "</td>";
           echo "<tr>";
           $no++;
         }

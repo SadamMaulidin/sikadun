@@ -1,21 +1,15 @@
 <?php
   session_start();
-  // include 'cek_login.php';
   require 'connection/conn.php';
-  $hasil = mysqli_query($conn, "SELECT * FROM mahasiswa WHERE rombel = '".$_SESSION['rombel']."' AND smt_now = '".$_SESSION['smt_now']."'");
+  $hasil = mysqli_query($conn, "SELECT * FROM pemesanan_mk Where nim_mhs = '".$_SESSION['nim_mhs']."'")
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>SIKADUN</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
@@ -35,8 +29,11 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <title>Praktikum Antar Muka</title>
+</head>
 
-
+<body>
   <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
@@ -49,10 +46,10 @@
       <ul>
           <li><a href="home.php">Home</a></li>
           <li><a href="list-dsn.php">Dosen</a></li>
-          <li><a class="active" href="list-mhs.php">Rombel</a></li>
+          <li><a href="list-mhs.php">Rombel</a></li>
           <li><a href="kurikulum.php">Kurikulum</a></li>
           <li><a href="jadwal.php">Jadwal</a></li>
-          <li><a href="list-pesan-mk.php">Pemesanan MK</a></li>
+          <li><a class="active" href="list-pesan-mk.php">Pemesanan MK</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -61,28 +58,22 @@
     </div>
   </header><!-- End Header -->
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <title>List Mahasiswa</title>
-</head>
-
-<body style="padding-top: 5em">
-  <div class="container">
+  <div class="container" style="margin-top: 100px">
     <center>
       <h2>
-        List Mahasiswa Rombel
+        Pemesanan Mata Kuliah
       </h2>
     </center>
+    <a href="pesan-matkul.php" class="btn btn-success" tabindex="-1" role="button" style="margin-bottom: 25px" aria-disabled="true">Pesan Mata Kuliah</a>
     <table class="table table-hover-dark">
       <thead class="thead-dark">
         <tr>
           <th scope="col">No.</th>
-          <th scope="col">NIM</th>
-          <th scope="col">Nama</th>
-          <th scope="col">Email</th>
-          <th scope="col">Tanggal Lahir</th>
+          <th scope="col">id_pmk</th>
+          <th scope="col">nim_mhs</th>
+          <th scope="col">kode_matkul</th>
+          <th scope="col">status</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -90,12 +81,15 @@
         $no = 1;
         while ($data = mysqli_fetch_array($hasil)) {
           echo "<tr>";
-          echo "<th>" . $no . "</th>";
+          echo "<th>" . $no . "</th>";        
+          echo "<td>" . $data['id_pmk'] . "</td>";
           echo "<td>" . $data['nim_mhs'] . "</td>";
-          echo "<td>" . $data['nama_mhs'] . "</td>";
-          echo "<td>" . $data['email_mhs'] . "</td>";
-          echo "<td>" . $data['tgl_lahir'] . "</td>";
-          echo "<tr>";
+          echo "<td>" . $data['kode_matkul'] . "</td>";
+          echo "<td>" . $data['stat'] . "</td>";          
+          echo "<td>
+            <a href='delete-pmk.php?id_pmk=$data[id_pmk] ' class='btn btn-danger btn-sm' style='font-weight: 600;'>Delete</a>
+            </td>";
+          echo "</tr>";
           $no++;
         }
         ?>

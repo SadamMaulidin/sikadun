@@ -2,7 +2,7 @@
   session_start();
   // include 'cek_login.php';
   require 'connection/conn.php';
-  $hasil = mysqli_query($conn, "SELECT * FROM mahasiswa WHERE rombel = '".$_SESSION['rombel']."' AND smt_now = '".$_SESSION['smt_now']."'");
+  $hasil = mysqli_query($conn, "SELECT * FROM mata_kuliah ORDER BY smt");
 ?>
 
 <!DOCTYPE html>
@@ -49,8 +49,8 @@
       <ul>
           <li><a href="home.php">Home</a></li>
           <li><a href="list-dsn.php">Dosen</a></li>
-          <li><a class="active" href="list-mhs.php">Rombel</a></li>
-          <li><a href="kurikulum.php">Kurikulum</a></li>
+          <li><a href="list-mhs.php">Rombel</a></li>
+          <li><a class="active" href="kurikulum.php">Kurikulum</a></li>
           <li><a href="jadwal.php">Jadwal</a></li>
           <li><a href="list-pesan-mk.php">Pemesanan MK</a></li>
         </ul>
@@ -72,17 +72,16 @@
   <div class="container">
     <center>
       <h2>
-        List Mahasiswa Rombel
+        Kurikulum
       </h2>
     </center>
     <table class="table table-hover-dark">
       <thead class="thead-dark">
         <tr>
           <th scope="col">No.</th>
-          <th scope="col">NIM</th>
-          <th scope="col">Nama</th>
-          <th scope="col">Email</th>
-          <th scope="col">Tanggal Lahir</th>
+          <th scope="col">Semester</th>
+          <th scope="col">Nama Mata Kuliah</th>
+          <th scope="col">SKS</th>
         </tr>
       </thead>
       <tbody>
@@ -91,10 +90,9 @@
         while ($data = mysqli_fetch_array($hasil)) {
           echo "<tr>";
           echo "<th>" . $no . "</th>";
-          echo "<td>" . $data['nim_mhs'] . "</td>";
-          echo "<td>" . $data['nama_mhs'] . "</td>";
-          echo "<td>" . $data['email_mhs'] . "</td>";
-          echo "<td>" . $data['tgl_lahir'] . "</td>";
+          echo "<td>" . $data['smt'] . "</td>";
+          echo "<td>" . $data['nama_matkul'] . "</td>";
+          echo "<td>" . $data['sks'] . "</td>";
           echo "<tr>";
           $no++;
         }

@@ -4,7 +4,7 @@ require 'connection/conn.php';
 
 $count = mysqli_query($conn, "SELECT COUNT(nim_mhs) FROM mahasiswa");
 ?>
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +45,7 @@ $count = mysqli_query($conn, "SELECT COUNT(nim_mhs) FROM mahasiswa");
 
 <body>
 
-  <!-- ======= Header ======= -->
+<!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
@@ -53,7 +53,18 @@ $count = mysqli_query($conn, "SELECT COUNT(nim_mhs) FROM mahasiswa");
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-      <a href="login.php" class="get-started-btn">Login</a>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+          <li><a href="home.php">Home</a></li>
+          <li><a href="list-dsn.php">Dosen</a></li>
+          <li><a href="list-mhs.php">Rombel</a></li>
+          <li><a href="kurikulum.php">Kurikulum</a></li>
+          <li><a href="jadwal.php">Jadwal</a></li>
+          <li><a href="list-pesan-mk.php">Pemesanan MK</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+      <a href="profile.php" class="get-started-btn">Profile</a>
 
     </div>
   </header><!-- End Header -->
@@ -63,14 +74,7 @@ $count = mysqli_query($conn, "SELECT COUNT(nim_mhs) FROM mahasiswa");
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
       <h1>Sistem Akademik Unice</h1>
       <h2>Universitas Negeri Cemarang</h2>
-      <!-- <?php
-        if (isset($_SESSION['logged'])) { 
-          echo "<a href='login.php' class='btn-get-started'>Login</a>";
-        } else {
-          echo "<a href='logout.php' class='btn-get-started'>Logout</a>";
-        }
-      ?> -->
-      <a href="login.php" class="btn-get-started">Login</a>
+      <a href="profile.php" class="btn-get-started">Profile</a>
     </div>
   </section><!-- End Hero -->
 
@@ -112,7 +116,7 @@ $count = mysqli_query($conn, "SELECT COUNT(nim_mhs) FROM mahasiswa");
         <div class="row counters">
 
           <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
+            <span data-purecounter-start="0" data-purecounter-end="$count" data-purecounter-duration="1" class="purecounter"></span>
             <p>Students</p>
           </div>
 
